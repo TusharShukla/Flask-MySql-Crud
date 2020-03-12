@@ -1,0 +1,59 @@
+
+     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script>
+     <script src="https://d3js.org/d3.v4.min.js"></script>
+     <script src="https://d3js.org/queue.v1.min.js"></script>
+     <script>
+         $( document ).ready(function() 
+         { 
+           $.get("/get_barchart_data", function(data) 
+           {
+           var i;
+           var dataset = [];
+           for (i = 0; i < data.length; i++) 
+           {
+             var mydata = data[i];
+             dataset.push(mydata)
+           }
+     
+           var svgWidth = 1160, svgHeight = 300, barPadding = 5;
+           var barWidth = (svgWidth / dataset.length);
+     
+           var svg = d3.select("svg")
+             .attr("width", svgWidth)
+             .attr("height", svgHeight)
+             .attr("fill", "#f0ad4e");
+     
+           var barChart = svg.selectAll("rect")
+             .data(dataset)
+             .enter()
+             .append("rect")
+             .attr("y", function(d) {
+               return svgHeight - d
+             })
+             .attr("height", function(d) {
+               return d;
+             })
+             .attr("width", barWidth - barPadding)
+             .attr("transform", function (d, i) {
+               var translate = [barWidth * i, 0];
+               return "translate("+ translate +")";
+             });
+     
+           var text = svg.selectAll("text")
+             .data(dataset)
+             .enter()
+             .append("text")
+             .text(function(d) {
+               return d;
+             })
+             .attr("y", function(d, i) {
+               return svgHeight - d - 2;
+             })
+             .attr("x", function(d, i) {
+               return barWidth * i ;
+             })
+             .attr("fill", "black")
+           })
+         })
+     </script>
