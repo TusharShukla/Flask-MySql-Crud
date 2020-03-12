@@ -6,10 +6,10 @@ from flask_mysqldb import MySQL
 app = Flask(__name__)
 app.secret_key = 'many random bytes'
 
-app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'fusion90'
-app.config['MYSQL_DB'] = 'crud'
+app.config['MYSQL_HOST'] = 'sql12.freemysqlhosting.net'
+app.config['MYSQL_USER'] = 'sql12326810'
+app.config['MYSQL_PASSWORD'] = 'nqEHhWBHf7'
+app.config['MYSQL_DB'] = 'sql12326810'
 
 mysql = MySQL(app)
 
